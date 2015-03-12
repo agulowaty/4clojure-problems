@@ -1,1 +1,1 @@
-# 4clojure-problems
+In this repo I'll be publishing my solutions to problems given at [4clojure.com](http://www.4clojure.com/problems).
