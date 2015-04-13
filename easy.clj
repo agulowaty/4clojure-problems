@@ -23,3 +23,19 @@
 (= ((fn [n]
       (take n ((fn fib [a b] (cons a (lazy-seq (fib b (+ a b))))) 1 1))  
      ) 6) '(1 1 2 3 5 8))
+
+; http://www.4clojure.com/problem/38
+; max of varargs
+(= ((fn [& args] (reduce #(if (> %2 %1) %2 %1) (first args) args))
+ 1 8 3 4) 
+   8)
+
+; http://www.4clojure.com/problem/29
+; return only uppper-cases from string
+(= ((fn [s] (apply str (filter #(Character/isUpperCase %) s))) "HeLlO, WoRlD!") "HLOWRD")
+
+; http://www.4clojure.com/problem/32
+; duplicate sequence
+(= (mapcat #(list % %) [:a :a :b :b]) 
+   '(:a :a :a :a :b :b :b :b))
+
