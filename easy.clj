@@ -39,3 +39,29 @@
 (= (mapcat #(list % %) [:a :a :b :b]) 
    '(:a :a :a :a :b :b :b :b))
 
+; http://www.4clojure.com/problem/48
+; intro to some
+(= 6 (some #{2 7 6} [5 6 7 8]))
+
+; http://www.4clojure.com/problem/34
+; range function
+(= ((fn [s e] (take-while #(< % e) (iterate inc s))) -2 2) 
+  '(-2 -1 0 1))
+
+; http://www.4clojure.com/problem/28
+; flatten seq
+(= ((fn [s] (filter #(not (sequential? %))
+  (rest (tree-seq sequential? seq s)))) () 
+'((1 2) 3 [4 [5 6]])) '(1 2 3 4 5 6))
+
+; http://www.4clojure.com/problem/39
+; interleave sequence
+(defn inter [a b]
+  (if (and (seq a) (seq b))
+    (into [(first a) (first b)] (inter (rest a) (rest b)))))
+(inter [1 3 4] [1 2])
+(= (inter [1 2 3] [:a :b :c]) 
+   '(1 :a 2 :b 3 :c))
+
+;; LOL version: (mapcat list)
+
